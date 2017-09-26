@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <title>Site</title>  
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css"> 
+        <link rel="stylesheet" href="css/clearfix.css">          
+    </head>
+    <body ng-app="testTask">
+        <section class="slide">
+            <div class="slide-content">
+                <header class="slide-header clearfix">
+                    <div class="logo">&nbsp;</div>
+                    <nav class="header-menu flex">
+                        <a class="header-menu__item" href="#mainPart">Home</a>
+                        <a class="header-menu__item" href="#">Products</a>
+                        <a class="header-menu__item__cart" href="#">&nbsp;</a>
+                    </nav>
+                </header>
+                <h1 class="main-text">Our clothing , your comfort</h1>
+                <p class="main-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do<br /> 
+                    eiusmod tempor incididunt ut labore et dolore<br />
+                magna aliqua.</p>                
+            </div>
+            <footer class="scroll-down">
+                <a href="" class="scroll-down__button" id="scrollDown">&nbsp;</a>
+            </footer>
+        </section>
+        <main id="mainPart" ng-controller="productsCtrl" class="main">
+            <form class="goods-type clearfix">
+                <div class="goods-type-wr flex">
+                    <label for="men" class="goods-type__item">
+                        <input type="checkbox" id="men" ng-checked="showCategory.Men" ng-model="showCategory.Men" class="goods-type__checkbox" />
+                        <span class="goods-type__check">&nbsp;</span>
+                        <span class="goods-type-label">Men</span>
+                    </label>
+                    <label for="women" class="goods-type__item">
+                        <input type="checkbox" id="women" ng-checked="showCategory.Women" ng-model="showCategory.Women" class="goods-type__checkbox" />
+                        <span class="goods-type__check">&nbsp;</span>
+                        <span class="goods-type-label">WoMen</span>
+                    </label>
+                    <label for="children" class="goods-type__item">
+                        <input type="checkbox" id="children" ng-checked="showCategory.Child" ng-model="showCategory.Child" class="goods-type__checkbox" />
+                        <span class="goods-type__check">&nbsp;</span>
+                        <span class="goods-type-label">childRobotoren</span>
+                    </label>
+                </div>
+                <input type="button" class="goods-type__submit" ng-click="changeFilter('Other')" value="see all prodRobotoucts" />
+            </form>
+            <div class="flex goods-wr">
+                <figure class="goods-card" ng-repeat="goods in data.items" ng-show="showCategory.{{goods.type}}" data-type="{{goods.type}}">
+                    <div class="select-wr">
+                        <select class="select-size">
+                            <option value="size" ng-repeat="item in goods.options">{{item}}</option>
+                        </select>
+                    </div>
+                    <img src="img/{{goods.img}}.png" alt="T-shirt" />
+                    <footer class="clearfix">
+                        <figcapture class="goods-title">{{goods.name}}</figcapture>
+                        <div class="cost">{{goods.price}}€</div>
+                    </footer>
+                </figure>               
+            </div>
+        </main>
+        <section class="pre-footer" id="preFooter">
+            <p class="pre-footer__text">“ E-commerce psd theme available ”</p>
+        </section>
+        <footer class="main-footer clearfix" ng-controller="menuCtrl">
+            <div class="left-footer">
+                <h4 class="left-footer__title">Trekking</h4>
+                <p class="left-footer__text">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="right-footer">
+                <nav class="footer-menu flex">
+                    <span ng-repeat="menuLink in data.footerMenu" class="footer-menu-wr">
+                        <a class="footer-menu__link" href='{{menuLink.link}}'>{{menuLink.title}}</a><span class="footer-menu__devider">|</span>
+                    </span>
+                </nav>
+                <p class="copyright">Design by gianluca cosetta</p>
+            </div>
+        </footer>
+    </body>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/jquery-smooth-scroll/src/jquery.smooth-scroll.js"></script>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+        <script src="node_modules/angular-touch/angular-touch.min.js"></script>  
+        <script src="js/app.js"></script> 
+    <script>
+        $(document).ready(function(){
+            $('#scrollDown').click(function(){
+                $.smoothScroll('+=' + $(window).height());
+            });
+        });
+    </script>
+</html>
